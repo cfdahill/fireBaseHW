@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Train Schedule</title>
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/javascript/trainSchedule.js"></script>
+    <!-- Need to include
+            CSS Reset
+            CSS Style
+            Bootstrap
+        -->
+</head>
+
+<body>
+    <header>All Aboard the Fail Train!</header>
+
+    <table id="schedule">
+        <tr>
+            <th>Train</th>
+            <th>Destination</th>
+            <th>Time of Next Arrival</th>
+            <th>Minutes Away</th>
+            <th>Frequency (in minutes)</th>
+        </tr>
+    </table>
+
+    <form>
+        <section class="trainInfo">Train: </section>
+        <input type="text" id="name">
+        <br>
+        <section class="trainInfo">Destination: </section>
+        <input type="text" id="dest">
+        <br>
+        <section class="trainInfo">First Arrival: </section>
+        <input type="text" id="arri">
+        <br>
+        <section class="trainInfo">Frequency (in minutes): </section>
+        <input type="text" id="freq">
+        <br>
+        <button id="submit" type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
