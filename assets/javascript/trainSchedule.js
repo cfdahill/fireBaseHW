@@ -18,8 +18,27 @@ var firstArrival = "";
 var td = $("<td>");
 var tr = $("<tr>");
 
-$(document).ready(function(){
-    $("#submit").click(function(event){
+function nextArrival(start, frequency) {
+    var first = moment(start, "HH:mm").format();
+    var currentTime = moment().format();
+    var timeSince = moment().diff(moment(first), "minutes"); //time between now and first train
+    var minutesTillNext = timeSince%frequency;
+    var timeTillNext = moment().add(minutesTillNext, "minutes").format("h:mm");
+
+    console.log("First train: " +first);
+    console.log("Current time: " + currentTime);
+    console.log("Minutes since first train: " +timeSince);
+    console.log("Minutes till next train: " + minutesTillNext);
+    console.log("Time of next train: " + timeTillNext);
+}
+
+$(document).ready(function () {
+    function makeRow(child) {
+        $("#schedule").append(tr);
+        tr.attr("data-train", child.name).append("<td>" + child.name + "</td><td>" + child.destination + "</td><td>" + child.frequency + "</td>");
+    }
+
+    $("#submit").click(function (event) {
         event.preventDefault();
         name = $("#name").val().trim();
         destination = $("#dest").val().trim();
@@ -27,26 +46,23 @@ $(document).ready(function(){
         firstArrival = $("#arri").val().trim();
 
         database.ref().push({
-            name : name,
-            destination : destination,
-            frequency : frequency,
-            firstArrival : firstArrival,
-            dateAdded : firebase.database.ServerValue.TIMESTAMP
+            name: name,
+            destination: destination,
+            frequency: frequency,
+            firstArrival: firstArrival,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
     });
 
-    database.ref().on("child_added", function(childSnapshot) {
-        console.log(childSnapshot.val().name);
-        console.log(childSnapshot.val().destination);
-        console.log(childSnapshot.val().frequency);
-        console.log(childSnapshot.val().firstArrival);
-        console.log(childSnapshot.val().dateAdded);
-    
-        $("#schedule").append(tr);
-        tr.append(td.html(childSnapshot.val().name));
-        //tr.append(td.html(childSnapshot.val().destination));
-        //.td.html(childSnapshot.val().destination).td.html(childSnapshot.val().frequency).td.html("minutes").td.html(childSnapshot.val().frequency));
-
+    database.ref().on("child_added", function (childSnapshot) {
+        var child = childSnapshot.val();
+        console.log(child.name);
+        /*console.log(child.destination);
+        console.log(child.frequency);
+        console.log(child.firstArrival);
+        console.log(child.dateAdded);*/
+        makeRow(child);
+        nextArrival(child.firstArrival, child.frequency);
     });
 });
 /*
