@@ -17,13 +17,15 @@ var frequency = 0; //will be measured in minutes
 var firstArrival = "";
 var td = $("<td>");
 var tr = $("<tr>");
+var timeTillNext;
+var minutesTillNext;
 
 function nextArrival(start, frequency) {
-    var first = moment(start, "HH:mm").format();
+    var first = moment(start, "HH:mm a").format();
     var currentTime = moment().format();
     var timeSince = moment().diff(moment(first), "minutes"); //time between now and first train
-    var minutesTillNext = timeSince%frequency;
-    var timeTillNext = moment().add(minutesTillNext, "minutes").format("h:mm");
+    minutesTillNext = frequency - (timeSince%frequency);
+    timeTillNext = moment().add(minutesTillNext, "minutes").format("h:mm a");
 
     console.log("First train: " +first);
     console.log("Current time: " + currentTime);
@@ -34,8 +36,7 @@ function nextArrival(start, frequency) {
 
 $(document).ready(function () {
     function makeRow(child) {
-        $("#schedule").append(tr);
-        tr.attr("data-train", child.name).append("<td>" + child.name + "</td><td>" + child.destination + "</td><td>" + child.frequency + "</td>");
+        $("#schedule").append("<tr data-train: '" + child.name + "'><td>" + child.name + "</td><td>" + child.destination + "</td><td>" + timeTillNext + "</td><td>" + minutesTillNext + "</td><td>" + child.frequency + "</td><td>" + child.firstArrival + "</td></tr>");
     }
 
     $("#submit").click(function (event) {
@@ -61,8 +62,8 @@ $(document).ready(function () {
         console.log(child.frequency);
         console.log(child.firstArrival);
         console.log(child.dateAdded);*/
-        makeRow(child);
         nextArrival(child.firstArrival, child.frequency);
+        makeRow(child);
     });
 });
 /*
