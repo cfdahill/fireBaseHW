@@ -1,0 +1,51 @@
+body{
+    background-color: black;
+    background-image: url(../images/failtrain.jpg);
+    background-repeat: no-repeat;
+    background-size: 62%;
+    background-position: center;
+    background-position-y: 36px;
+}
+header{
+    color: #1fd44f;
+    font-size: 36px;
+    margin-left: 20px;
+}
+
+#schedule{
+    text-align: center;
+    margin-left: 20px;
+}
+
+th{
+    padding:15px;
+    background-color:#1fd44f;
+    font-weight : bold;
+
+}
+tr{
+    padding: 5px;
+    background-color:rgb(208, 224, 208);
+    line-height: 1.6;
+    
+}
+
+#schedule tr:nth-child(even){
+    background-color: #dfa2a2;
+}
+
+form{
+    font-size:16px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: white;
+}
+section{
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+button{
+    margin-top: 15px;
+}
+
+

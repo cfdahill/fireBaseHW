@@ -31,8 +31,9 @@ $(document).ready(function () {
 
     //makeRow takes the train information and puts it all into a row for the schedule table
     function makeRow(child) {
-        $("#schedule").append("<tr data-train: '" + child.name + "'><td>" + child.name + "</td><td>" + child.destination + "</td><td>" + timeTillNext + "</td><td>" + minutesTillNext + "</td><td>" + child.frequency + "</td><td>" + child.firstArrival + "</td><td><button type='submit' class='remove'>remove</button></td></tr>");
-        $(".remove").click(remove);
+        $("#schedule").append("<tr data-train: '" + child.name + "'><td>" + child.name + "</td><td>" + child.destination + "</td><td>" + timeTillNext + "</td><td>" + minutesTillNext + "</td><td>" + child.frequency + "</td><td>" + child.firstArrival + "</td></tr>");
+        /* put <td><button type='submit' class='remove'>remove</button></td> in the above line once able to remove info from firebase
+        $(".remove").click(remove); */
     }
 
     //Lets user put in new train information
@@ -53,13 +54,13 @@ $(document).ready(function () {
     });
 
     //Delete train data from firebase and table:        
-    function remove(event) {
+ /*   function remove(event) {
         event.preventDefault();
         var row = $(this).closest('tr');
         row.remove();
-        //var rowId = row.attr('data-train');  THIS LINE AN ATTEMPT TO MAKE FOLLOWING LINE WORK
-      //  database.ref().child().remove()  THIS LINE CURRENTLY NOT WORKING
-    };
+        //var rowId = row.attr('data-train');  
+        database.ref().child("name").remove();
+    }; */
 
     //Puts all of the trains information into the table
     function trainSchedule() {
