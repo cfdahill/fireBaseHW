@@ -72,6 +72,8 @@ $(document).ready(function () {
 
             nextArrival(child.firstArrival, child.frequency);  //does the calculations needed to get next arrival information
             makeRow(child);  //puts all of the information for a train into a row
+        }, function(errorObject) {
+            console.log("Wow!  Let's see how you missed the Fail Train: " + errorObject);
         });
     }
     trainSchedule(); //runs on load up
